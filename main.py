@@ -1,3 +1,4 @@
+# Migration to GitHub
 import sys
 from database import Database
 from command_line import CommandLine, ExitException
