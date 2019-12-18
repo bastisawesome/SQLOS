@@ -1,0 +1,8 @@
+__pyc__/*
+
+*/*.pyc
+
+poetry.lock
+pyproject.toml
+sqlos.db
+sqlos.db-journal
