@@ -4,6 +4,8 @@ __pycache__/*
 
 */*.pyc
 
+.vscode
+
 # Ignore Poetry files
 poetry.lock
 pyproject.toml
