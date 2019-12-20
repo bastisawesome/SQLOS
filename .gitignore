@@ -1,8 +1,13 @@
+# Ignore Python compiled binaries
 __pyc__/*
+*/__pyc__/*
 
 */*.pyc
 
+# Ignore Poetry files
 poetry.lock
 pyproject.toml
+
+# Ignore database files
 sqlos.db
 sqlos.db-journal
