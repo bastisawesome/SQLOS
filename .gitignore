@@ -1,6 +1,6 @@
 # Ignore Python compiled binaries
-__pyc__/*
-*/__pyc__/*
+__pycache__/*
+*/__pycache__/*
 
 */*.pyc
 
