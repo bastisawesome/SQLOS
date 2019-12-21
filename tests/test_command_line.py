@@ -1,9 +1,16 @@
 import unittest
 
-from command_line import CommandLine, HelpBuiltin
+from command_line import CommandLine, HelpBuiltin, ExitException, ExitBuiltin
 from database import Database
+from util import pretty_print
 
 import sys
+
+
+def clear_stdout():
+    sys.stdout.truncate(0)
+    sys.stdout.seek(0)
+
 
 class TestCommandLine(unittest.TestCase):
 
@@ -14,25 +21,43 @@ class TestCommandLine(unittest.TestCase):
     def tearDown(self):
         self.cl.__del__()
 
-        self.clear_stdout()
-    
-    def clear_stdout(self):
-        sys.stdout.truncate(0)
-        sys.stdout.seek(0)
-    
+        clear_stdout()
+
     def test_builtin_help(self):
         hb = HelpBuiltin()
         hb(cl=self.cl, args=['help'])
         self.assertEqual(sys.stdout.getvalue().strip(), hb.desc)
 
-        self.clear_stdout()
+        clear_stdout()
         
         hb(cl=self.cl, args=['fakecommand'])
         
         self.assertEqual(sys.stdout.getvalue().strip(), 'Command `fakecommand` is not recognised as a builtin command.')
+
+        clear_stdout()
+
+        hb(cl=self.cl, args=[])
+
+        # Store the output of hb
+        hb_out = sys.stdout.getvalue().strip()
+        clear_stdout()
+
+        # Reimplement algorithm used by help builtin
+        coms = dict(self.cl.builtin)
+        for com in coms.keys():
+            coms[com] = coms[com].short_desc
+
+        pretty_print(coms)
+
+        # Store the output of pretty_print
+        pp_out = sys.stdout.getvalue().strip()
+
+        self.assertEqual(hb_out, pp_out)
     
     def test_builtin_exit(self):
-        pass
+        with self.assertRaises(ExitException):
+            exit_builtin = ExitBuiltin()
+            exit_builtin(cl=self.cl)
     
     def test_builtin_alias(self):
         pass

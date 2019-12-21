@@ -45,7 +45,8 @@ class CommandLine():
             'Implement users and authentication',
             'Move all print statements to standard out',
             'Change util.py to return values for commands to process into stdout',
-            'Implement stdout as a class'
+            'Implement stdout as a class',
+            'Implement exception handler in database'
         ]
         
         self.db = db
@@ -62,16 +63,14 @@ class CommandLine():
         Set welcome message
         '''
         self.welcome_msg = \
-'''   _____   ____   _       ____    _____ 
+r'''   _____   ____   _       ____    _____ 
   / ____| / __ \ | |     / __ \  / ____|
  | (___  | |  | || |    | |  | || (___  
   \___ \ | |  | || |    | |  | | \___ \ 
   ____) || |__| || |____| |__| | ____) |
  |_____/  \___\_\|______|\____/ |_____/ 
                                         
-                                        
-\t\tSQL SHELL\nCreated by: Giles Johnson\nCopyright: 2019
-'''
+''' + '''\t\tSQL SHELL\nCreated by: Giles Johnson\nCopyright: 2019'''
         
     def init_commands(self):
         '''Initialise commands in the commands module'''
@@ -217,7 +216,7 @@ class HelpBuiltin(Builtin):
     
     def __call__(self, cl, args):
         if len(args) == 0:
-            arg_dict = dict(cl.builtin)
+            arg_dict = dict(cl.builtin) # Casting to avoid creating a pointer
             for com in arg_dict.keys():
                 arg_dict[com] = arg_dict[com].short_desc
 
