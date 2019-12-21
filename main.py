@@ -6,8 +6,6 @@ def main(args):
     #return test_database()
     
     cl = CommandLine(db = Database())
-    cl.parse_command('test', [])
-    return
     #cl.parse_command('database', ['dump'])
     #return
     try:
