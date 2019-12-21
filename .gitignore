@@ -5,6 +5,7 @@ __pycache__/*
 */*.pyc
 
 .vscode
+.idea
 
 # Ignore Poetry files
 poetry.lock
